@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>QuickStream: Home</title>
+    </head>
+    <body>
+        <header>HomeScreen</header>
+        <a href="/stream">Create a stream</a>
+        <h2>Watch a stream</h2>
+        <input
+            type="text"
+            name="streamId"
+            placeholder="paste stream id"
+            id="streamId"
+        />
+        <a href="/watch" id="watchStream">Watch Stream</a>
+        <script>
+            const watchStreamBtn = document.querySelector("#watchStream");
+            const streamId = document.querySelector("#streamId");
+            streamId.addEventListener("input", () => {
+                watchStreamBtn.setAttribute(
+                    "href",
+                    `/watch?stream-id=${streamId.value}`
+                );
+            });
+        </script>
+    </body>
+</html>
