@@ -37,6 +37,20 @@ app.get("/watch", (req, res) => {
     res.sendFile(path.resolve(__dirname, "templates", "watch.html"));
 });
 
+app.get(
+    "/.well-known/pki-validation/38DB0B18B8B9ACD0A0C5AE12CD52C998.txt",
+    (req, res) => {
+        res.download(
+            path.resolve(
+                __dirname,
+                "templates",
+                "38DB0B18B8B9ACD0A0C5AE12CD52C998.txt"
+            ),
+            "38DB0B18B8B9ACD0A0C5AE12CD52C998.txt"
+        );
+    }
+);
+
 app.use("/peerjs", peerServer);
 
 module.exports = app;
