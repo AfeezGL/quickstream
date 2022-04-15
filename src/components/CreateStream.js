@@ -55,6 +55,11 @@ const CreateStream = ({ user }) => {
     };
 
     startSream();
+
+    return async () => {
+      // Leave the channel.
+      await rtc.client.leave();
+    };
   }, []);
 
   return (
