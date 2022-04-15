@@ -1,70 +1,69 @@
-import Peer from "peerjs";
+import AgoraRTC from "agora-rtc-sdk-ng";
 import React, { useEffect, useRef, useState } from "react";
-import { uuid } from "uuidv4";
 import Auth from "./Auth";
 import LiveChat from "./LiveChat";
 
 const CreateStream = ({ user }) => {
-    const [streamId, setStreamId] = useState("");
-    const [stream, setStream] = useState(null);
-    const myStream = useRef();
+  const [streamId, setStreamId] = useState("");
+  const myStream = useRef();
 
-    const getUserMedia =
-        navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia;
+  const rtc = {
+    // For the local audio and video tracks.
+    localAudioTrack: null,
+    localVideoTrack: null,
+    client: null,
+  };
 
-    useEffect(() => {
-        const uid = uuid();
-        const startSream = () => {
-            // create peer
-            const peer = new Peer(uid, {
-                host: "/",
-                port: process.env.NODE_ENV === "development" ? 9000 : 443,
-                path: "/peerjs",
-                secure: process.env.NODE_ENV === "development" ? false : true,
-            });
+  const options = {
+    appId: "7ac8167595aa47aeb4ddf6b34353ec38",
+    channel: "test",
+    token: "19edc60b759d4bd2a699c7faa23f91cf",
+    uid: 123456,
+  };
 
-            //create video stream
-            getUserMedia(
-                {
-                    video: true,
-                    audio: true,
-                },
-                (videoStream) => {
-                    myStream.current.srcObject = videoStream; //this would show in the users' browser window
-                    setStream(videoStream); //this would be sent to would be sent to whoever connects
-                }
-            );
+  setStreamId(options.uid);
 
-            peer.on("open", function (id) {
-                setStreamId(id);
-            });
+  useEffect(() => {
+    const startSream = async () => {
+      // create client
+      rtc.client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
+      rtc.client.setClientRole("host");
+      await rtc.client.join(
+        options.appId,
+        options.channel,
+        options.token,
+        options.uid
+      );
 
-            peer.on("connection", (connection) => {
-                const call = peer.call(connection.peer, stream);
-                connection.on("data", (data) => {
-                    console.log(data);
-                });
-            });
-        };
+      // Create an audio track from the audio sampled by a microphone.
+      rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+      // Create a video track from the video captured by a camera.
+      rtc.localVideoTrack = await AgoraRTC.createCameraVideoTrack();
 
-        startSream();
-    }, []);
+      // Publish the local audio and video tracks to the channel.
+      await rtc.client.publish([rtc.localAudioTrack, rtc.localVideoTrack]);
 
-    return (
-        <div>
-            <h1>Create Stream</h1>
-            <Auth user={user} />
-            <div className="streamContainer">
-                <div className="video">
-                    <video ref={myStream} muted autoPlay />
-                    <p>{streamId}</p>
-                </div>
-                {streamId && <LiveChat streamId={streamId} />}
-            </div>
+      rtc.localVideoTrack.play();
+
+      console.log("publish success!");
+    };
+
+    startSream();
+  }, []);
+
+  return (
+    <div>
+      <h1>Create Stream</h1>
+      <Auth user={user} />
+      <div className="streamContainer">
+        <div className="video">
+          <video ref={myStream} muted autoPlay />
+          <p>{streamId}</p>
         </div>
-    );
+        {streamId && <LiveChat streamId={streamId} />}
+      </div>
+    </div>
+  );
 };
 
 export default CreateStream;
