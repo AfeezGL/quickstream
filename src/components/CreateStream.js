@@ -1,5 +1,7 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
 import React, { useEffect, useRef, useState } from "react";
+import { uuid } from "uuidv4";
+import generateToken from "../createToken";
 import Auth from "./Auth";
 import LiveChat from "./LiveChat";
 
@@ -12,10 +14,12 @@ const rtc = {
 
 const options = {
   appId: "7ac8167595aa47aeb4ddf6b34353ec38",
-  channel: "test",
-  token:
-    "0067ac8167595aa47aeb4ddf6b34353ec38IAA+7QV4e0KyD+TfKeNir/s+w6kjMK/QB1sBCSubDJQUlQx+f9gAAAAAEAA7zd8LXIZaYgEAAQBchlpi",
-  uid: 12,
+  channel: uuid(),
+  uid: uuid(),
+  //   channel: "test",
+  //   token:
+  //     "0067ac8167595aa47aeb4ddf6b34353ec38IAA+7QV4e0KyD+TfKeNir/s+w6kjMK/QB1sBCSubDJQUlQx+f9gAAAAAEAA7zd8LXIZaYgEAAQBchlpi",
+  //   uid: 12,
 };
 
 rtc.client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
@@ -33,7 +37,7 @@ const CreateStream = ({ user }) => {
       await rtc.client.join(
         options.appId,
         options.channel,
-        options.token,
+        generateToken(options.uid, options.channel),
         options.uid
       );
 
