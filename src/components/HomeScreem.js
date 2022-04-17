@@ -38,8 +38,6 @@ const HomeScreem = () => {
           <div className="submit-btn-container">
             <input type="submit" value="Watch Stream" />
           </div>
-
-          {/* <Link to={`watch/${streamId}`}>Watch Stream</Link> */}
         </form>
       </div>
     </>
