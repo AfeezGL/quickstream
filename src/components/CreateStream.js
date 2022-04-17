@@ -1,8 +1,6 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
 import React, { useEffect, useRef, useState } from "react";
-import { uuid } from "uuidv4";
 import generateToken from "../createToken";
-import generate from "../streamIdGen";
 import Auth from "./Auth";
 import LiveChat from "./LiveChat";
 
@@ -15,11 +13,7 @@ const rtc = {
 
 const options = {
   appId: "7ac8167595aa47aeb4ddf6b34353ec38",
-  uid: null,
-  //   channel: "test",
-  //   token:
-  //     "0067ac8167595aa47aeb4ddf6b34353ec38IAA+7QV4e0KyD+TfKeNir/s+w6kjMK/QB1sBCSubDJQUlQx+f9gAAAAAEAA7zd8LXIZaYgEAAQBchlpi",
-  //   uid: 12,
+  uid: 1,
 };
 
 rtc.client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
@@ -31,17 +25,15 @@ const CreateStream = ({ user }) => {
   useEffect(() => {
     const startSream = async () => {
       // create stream id
-      let id = generate();
-      setStreamId(id);
+      setStreamId("test");
       // create client
       rtc.client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
       rtc.client.setClientRole("host");
-      console.log("uid", rtc.client.uid);
       await rtc.client.join(
         options.appId,
-        streamId,
-        generateToken(options.uid, streamId),
-        rtc.client.uid
+        "test",
+        generateToken(options.uid, "test"),
+        options.uid
       );
 
       // Create an audio track from the audio sampled by a microphone.
