@@ -59,9 +59,11 @@ const CreateStream = ({ user }) => {
 	}, []);
 
 	return (
-		<div>
-			<h1>Create Stream</h1>
-			<Auth user={user} />
+		<>
+			<header className="streaming-pages-header">
+				<h1>Create Stream</h1>
+				<Auth user={user} />
+			</header>
 			<div className="streamContainer">
 				<div className="video">
 					<div ref={myStream} className="video-container"></div>
@@ -69,7 +71,7 @@ const CreateStream = ({ user }) => {
 				</div>
 				{streamId && <LiveChat streamId={streamId} host={true} user={user} />}
 			</div>
-		</div>
+		</>
 	);
 };
 

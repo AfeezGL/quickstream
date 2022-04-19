@@ -70,9 +70,11 @@ const WatchSream = ({ user }) => {
 	}, [streamId]);
 
 	return (
-		<div>
-			<h1>Watch stream</h1>
-			<Auth user={user} />
+		<>
+			<header className="streaming-pages-header">
+				<h1>Watch stream</h1>
+				<Auth user={user} />
+			</header>
 			<div className="streamContainer">
 				{!showStream ? (
 					<div className="no-video">No Video Stream</div>
@@ -81,7 +83,7 @@ const WatchSream = ({ user }) => {
 				)}
 				<LiveChat streamId={streamId} user={user} />
 			</div>
-		</div>
+		</>
 	);
 };
 

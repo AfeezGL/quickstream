@@ -64,27 +64,25 @@ const LiveChat = ({ user, streamId, host = false }) => {
 	};
 
 	return (
-		<div>
+		<div className="liveChat">
 			<h3>Live chat</h3>
-			<div className="liveChat">
-				<div className="messages">
-					{messages.map((message) => (
-						<Message key={message.id} message={message} />
-					))}
-				</div>
-				<form onSubmit={submitForm}>
-					<input
-						type="text"
-						name="text"
-						id="text"
-						value={text}
-						onChange={(e) => {
-							setText(e.target.value);
-						}}
-					/>
-					<input type="submit" value="send" className="submitBtn" />
-				</form>
+			<div className="messages">
+				{messages.map((message) => (
+					<Message key={message.id} message={message} />
+				))}
 			</div>
+			<form onSubmit={submitForm}>
+				<input
+					type="text"
+					name="text"
+					id="text"
+					value={text}
+					onChange={(e) => {
+						setText(e.target.value);
+					}}
+				/>
+				<input type="submit" value="send" className="submitBtn" />
+			</form>
 		</div>
 	);
 };
