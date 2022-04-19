@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import db, { timeStamp } from "../firebase";
 
-const LiveChat = ({ streamId, host = false }) => {
+const LiveChat = ({ user, streamId, host = false }) => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -24,9 +24,11 @@ const LiveChat = ({ streamId, host = false }) => {
   const submitForm = (e) => {
     e.preventDefault();
     if (!text) return;
-    if (text) {
+
+    // Chatting as host
+    if (host) {
       db.collection("streams").doc(streamId).collection("messages").add({
-        sender: "annonymous",
+        sender: "HOST",
         text,
         timestamp: timeStamp(),
       });

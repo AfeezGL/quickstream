@@ -64,7 +64,7 @@ const WatchSream = ({ user }) => {
     getStream();
 
     return async () => {
-      // Leave the channel.
+      // Leave the channel when component unmounts.
       await rtc.client.leave();
     };
   }, [streamId]);

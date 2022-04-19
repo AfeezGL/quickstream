@@ -48,8 +48,6 @@ const CreateStream = ({ user }) => {
       await rtc.client.publish([rtc.localAudioTrack, rtc.localVideoTrack]);
 
       rtc.localVideoTrack.play(myStream.current);
-
-      console.log("publish success!");
     };
 
     startSream();
@@ -69,7 +67,7 @@ const CreateStream = ({ user }) => {
           <div ref={myStream} className="video-container"></div>
           <p>{streamId}</p>
         </div>
-        {streamId && <LiveChat streamId={streamId} />}
+        {streamId && <LiveChat streamId={streamId} host={true} />}
       </div>
     </div>
   );
