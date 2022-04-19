@@ -31,7 +31,7 @@ const LiveChat = ({ user, streamId, host = false }) => {
 				.doc(streamId)
 				.collection("messages")
 				.add({
-					sender: user ? `${user.displayName}(host)` : "HOST",
+					sender: user ? `${user.displayName} (Host)` : "HOST",
 					text,
 					timestamp: timeStamp(),
 				});
