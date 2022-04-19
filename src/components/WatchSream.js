@@ -31,7 +31,7 @@ const WatchSream = ({ user }) => {
       await rtc.client.join(
         options.appId,
         "test",
-        generateToken(options.uid, streamId),
+        generateToken(options.uid, "test"),
         options.uid
       );
 

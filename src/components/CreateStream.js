@@ -1,5 +1,6 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
-import React, { useEffect, useRef, useState } from "react";
+import { uuid } from "uuidv4";
+import { useEffect, useRef, useState } from "react";
 import generateToken from "../createToken";
 import Auth from "./Auth";
 import LiveChat from "./LiveChat";
@@ -25,7 +26,9 @@ const CreateStream = ({ user }) => {
   useEffect(() => {
     const startSream = async () => {
       // create stream id
-      setStreamId("test");
+      let id = uuid();
+      setStreamId(id);
+
       // create client
       rtc.client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
       rtc.client.setClientRole("host");

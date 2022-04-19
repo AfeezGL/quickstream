@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import db, { timeStamp } from "../firebase";
 
-const LiveChat = ({ streamId }) => {
+const LiveChat = ({ streamId, host = false }) => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -23,7 +23,7 @@ const LiveChat = ({ streamId }) => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("submit clicked");
+    if (!text) return;
     if (text) {
       db.collection("streams").doc(streamId).collection("messages").add({
         sender: "annonymous",
