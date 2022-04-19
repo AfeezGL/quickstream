@@ -67,7 +67,7 @@ const CreateStream = ({ user }) => {
 			<div className="streamContainer">
 				<div className="video">
 					<div ref={myStream} className="video-container"></div>
-					<p>{streamId}</p>
+					<p>https://quick-stream.web.app/watch/{streamId}</p>
 				</div>
 				{streamId && <LiveChat streamId={streamId} host={true} user={user} />}
 			</div>
