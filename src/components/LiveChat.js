@@ -27,11 +27,14 @@ const LiveChat = ({ user, streamId, host = false }) => {
 
 		// Chatting as host
 		if (host) {
-			db.collection("streams").doc(streamId).collection("messages").add({
-				sender: "HOST",
-				text,
-				timestamp: timeStamp(),
-			});
+			db.collection("streams")
+				.doc(streamId)
+				.collection("messages")
+				.add({
+					sender: user ? `${user.displayName}(host)` : "HOST",
+					text,
+					timestamp: timeStamp(),
+				});
 
 			setText("");
 		}
