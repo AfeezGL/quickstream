@@ -13,6 +13,7 @@ function App() {
 			setUser(user);
 		});
 	}, []);
+
 	return (
 		<BrowserRouter className='App'>
 			<Routes>
