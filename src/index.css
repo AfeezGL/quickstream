@@ -1,13 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
 	color: white;
 }
 body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+		'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #192e4f;
@@ -42,7 +41,7 @@ header p {
 	width: 100%;
 }
 
-.call-to-action input[type="text"] {
+.call-to-action input[type='text'] {
 	color: #192e4f;
 	padding: 0.5rem;
 	font-size: 1.2rem;
@@ -54,7 +53,7 @@ header p {
 	justify-content: end;
 }
 
-.call-to-action input[type="submit"] {
+.call-to-action input[type='submit'] {
 	font-size: 1.8rem;
 	padding: 0.9rem;
 }
