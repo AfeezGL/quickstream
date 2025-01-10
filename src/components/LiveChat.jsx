@@ -64,26 +64,45 @@ const LiveChat = ({ user, streamId, host = false }) => {
 	};
 
 	return (
-		<div className="liveChat">
-			<h3>Live chat</h3>
-			<div className="messages">
-				{messages.map((message) => (
-					<Message key={message.id} message={message} />
-				))}
+		<>
+			<div className="lg:col-span-1">
+				<div className="bg-white/5 rounded-lg aspect-square   flex flex-col">
+					<div className="p-4 border-b border-white/10">
+						<h2 className="font-semibold">Live Chat</h2>
+					</div>
+
+					<div className="flex-1 overflow-y-auto p-4">
+						{messages.map((message) => (
+							<Message key={message.id} message={message} />
+						))}
+					</div>
+
+					<div className="p-2 border-t border-white/10">
+						<div className="flex gap-2 flex-col">
+							<form onSubmit={submitForm}>
+								<input
+									type="text"
+									placeholder="Type a message..."
+									id="text"
+									value={text}
+									onChange={(e) => {
+										setText(e.target.value);
+									}}
+									className="flex-1 bg-transparent border border-gray-600 rounded py-2 px-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-400"
+								/>
+								<button
+									className="bg-white text-[#0F0F0F] px-4 py-[0.4rem] rounded font-medium hover:bg-gray-100 transition-colors"
+									type="submit"
+									
+								>
+									Send
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<form onSubmit={submitForm}>
-				<input
-					type="text"
-					name="text"
-					id="text"
-					value={text}
-					onChange={(e) => {
-						setText(e.target.value);
-					}}
-				/>
-				<input type="submit" value="send" className="submitBtn" />
-			</form>
-		</div>
+		</>
 	);
 };
 

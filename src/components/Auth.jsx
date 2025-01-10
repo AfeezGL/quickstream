@@ -10,18 +10,22 @@ const Auth = ({ user }) => {
 		auth.signOut();
 	};
 
-	return (
-		<div className="auth">
-			{!user ? (
-				<button onClick={login}>
-					<i className="fa-solid fa-arrow-right-to-bracket"></i> Login
-				</button>
-			) : (
-				<button onClick={logout}>
-					<i className="fa-solid fa-arrow-right-from-bracket"></i> Logout
-				</button>
-			)}
-		</div>
+	return user ? (
+		<button
+			className=" text-white shadow-lg py-2 px-2 rounded  flex items-center justify-center"
+			onClick={logout}
+		>
+			<i className="fa-solid fa-arrow-right-from-bracket mr-2"></i>
+			Logout
+		</button>
+	) : (
+		<button
+			className=" text-white shadow-lg py-2 px-2 rounded  flex items-center justify-center"
+			onClick={login}
+		>
+			<i className="fa-solid fa-arrow-right-to-bracket mr-2"></i>
+			Login
+		</button>
 	);
 };
 
