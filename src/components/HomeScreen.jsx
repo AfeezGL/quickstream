@@ -25,7 +25,7 @@ const HomeScreen = () => {
 				<div className='relative container mx-auto px-4 py-16 flex flex-col items-center'>
 					<div className='text-center space-y-6 max-w-3xl mx-auto mb-16'>
 						<h1 className='text-4xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent'>
-							quickStream
+							QuickStream
 						</h1>
 						<p className='text-lg md:text-xl text-gray-300 max-w-2xl mx-auto'>
 							Connect with your friends and fans without the hassles of special software and signups. The
