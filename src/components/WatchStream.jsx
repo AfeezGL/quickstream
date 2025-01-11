@@ -1,5 +1,5 @@
 import AgoraRTC from 'agora-rtc-sdk-ng';
-import { AlertCircle, Video } from 'lucide-react';
+import { AlertCircle, Video, VolumeX } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import generateToken from '../createToken';
@@ -15,11 +15,11 @@ const options = {
 const WatchStream = ({ user }) => {
 	const { streamId } = useParams();
 	const [showStream, setShowStream] = useState(false);
-	const [audioTrackFailed, setAudioTrackFailed] = useState(false);
+	const [autoplayFailed, setAutoplayFailed] = useState(false);
 	const videoStream = useRef();
 
 	AgoraRTC.onAutoplayFailed = () => {
-		setAudioTrackFailed(true);
+		setAutoplayFailed(true);
 	};
 
 	const client = useRef(AgoraRTC.createClient({ mode: 'live', codec: 'vp8' }));
@@ -59,7 +59,7 @@ const WatchStream = ({ user }) => {
 
 				<div className='relative container mx-auto px-4 py-6'>
 					<div className='flex justify-between items-center mb-6'>
-						<h1 className='text-2xl font-bold'>quikStream</h1>
+						<h1 className='text-2xl font-bold'>quickStream</h1>
 
 						<Auth user={user} />
 					</div>
@@ -85,14 +85,14 @@ const WatchStream = ({ user }) => {
 
 								<div ref={videoStream} className='w-full h-full' />
 
-								{audioTrackFailed && (
+								{autoplayFailed && (
 									<button
-										className='absolute bottom-0 left-1/2 -translate-x-1/2'
+										className='absolute bottom-2 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-emerald-500/25 transition-all duration-200 py-2 px-4 rounded font-semibold flex items-center justify-center'
 										onClick={() => {
-											setAudioTrackFailed(false);
+											setAutoplayFailed(false);
 										}}
 									>
-										resume audio
+										<VolumeX />
 									</button>
 								)}
 							</div>

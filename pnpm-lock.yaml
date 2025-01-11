@@ -14,9 +14,6 @@ dependencies:
   firebase:
     specifier: 8.2.3
     version: 8.2.3
-  lucide:
-    specifier: ^0.471.0
-    version: 0.471.0
   lucide-react:
     specifier: ^0.471.0
     version: 0.471.0(react@18.3.1)
@@ -2963,10 +2960,6 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
     dependencies:
       react: 18.3.1
-    dev: false
-
-  /lucide@0.471.0:
-    resolution: {integrity: sha512-q464ocnqGoI1c0aRLiU3l3GYIZBeddlo2s1+XrkkXjfQo+Y5djyNuVH/pa4zMZyM5RHPF4vlf8FBzHJQNzrvPw==}
     dev: false
 
   /magic-string@0.30.17:
